@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ultimate Body Building Guide</title>
+  <style>
+    /* ... existing styles ... */
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://images.unsplash.com/photo-1554284126-aa88f22d8b74');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+    header {
+      padding: 20px;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+    }
+    header h1 { color: #ff3c00; margin: 0; }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+    .form-card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 6px; }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+    button {
+      background: #ff3c00;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background: #e63400; }
+    .output {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+    }
+    h2 { color: #00ffcc; }
+    h3 { color: #ffcc00; }
+    ul { margin-left: 20px; }
+    
+    /* New Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    th, td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: rgba(255, 60, 0, 0.3);
+      color: #ffcc00;
+    }
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .body-type {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .body-type label {
+      background: rgba(255,255,255,0.15);
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .body-type label:hover { transform: scale(1.05); }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: rgba(0,0,0,0.6);
+      margin-top: 30px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💪 Ultimate Body Building & Fitness Guide</h1>
+    <p>Personalized Exercise • Diet • Schedule</p>
+  </header>  
+
+  <div class="container">
+    <div class="form-card">
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" id="age" placeholder="Enter your age" />
+      </div>
+      <div class="form-group">
+        <label>Weight (kg)</label>
+        <input type="number" id="weight" placeholder="Enter your weight" />
+      </div>
+      <div class="form-group">
+        <label>Height (cm)</label>
+        <input type="number" id="height" placeholder="Enter your height" />
+      </div>
+      <div class="form-group">
+        <label>Gender (Male/Female)</label>
+        <input type="name" id="gender" placeholder="Enter your Gender" />
+      </div>
+
+      <div class="form-group">
+        <label>Body Type</label>
+        <div class="body-type">
+          <label><input type="radio" name="body" value="slim" /> Slim</label>
+          <label><input type="radio" name="body" value="fat" /> Fat</label>
+          <label><input type="radio" name="body" value="normal" /> Normal</label>
+          <label><input type="radio" name="body" value="muscular" /> Muscular</label>
+        </div>
+      </div>
+      <button onclick="generatePlan()">Get My Fitness Plan</button>
+    </div>
+
+    <div class="output" id="output"></div>
+  </div>  
+
+  <footer>
+    Stay Consistent • Rest on Sundays • Fitness is a Lifestyle
+  </footer>  
+
+  <script>
+    function generatePlan() {
+      const age = parseInt(document.getElementById('age').value);
+      const weight = parseInt(document.getElementById('weight').value);
+      const height = parseInt(document.getElementById('height').value);
+      const body = document.querySelector('input[name="body"]:checked');
+      const output = document.getElementById('output');
+
+      if (!age || !weight || !height || !body) {
+        output.innerHTML = '<p>Please fill all the details.</p>';
+        return;
+      }
+
+      let exercise = '';
+      let diet = '';
+
+      if (age < 18) {
+        exercise = `<h3>Exercise Plan</h3>
+        <ul>
+          <li>Morning jogging – 20 minutes</li>
+          <li>Push-ups – 3 x 10</li>
+          <li>Squats – 3 x 15</li>
+          <li>Skipping rope – 10 minutes</li>
+          <li>Stretching & yoga</li>
+        </ul>`;
+        diet = `<h3>Diet Plan</h3>
+        <ul>
+          <li>Calories: ~2200 kcal/day</li>
+          <li>Protein: Milk, eggs, dal, curd</li>
+          <li>Fruits & vegetables daily</li>
+          <li>Avoid heavy supplements</li>
+        </ul>`;
+      } else if (age >= 18 && age <= 45) {
+        if (weight > 75 || body.value === 'fat') {
+          exercise = `<h3>Strict Gym & Physical Exercise</h3>
+          <ul>
+            <li>Treadmill / Cycling – 30 min</li>
+            <li>Barbell Squats – 4 x 10</li>
+            <li>Bench Press – 4 x 8</li>
+            <li>Deadlifts – 3 x 8</li>
+            <li>Plank – 3 x 1 min</li>
+          </ul>`;
+          diet = `<h3>Fat Loss Diet</h3>
+          <ul>
+            <li>Calories: 1800–2000 kcal/day</li>
+            <li>Protein: 1.8 g/kg body weight</li>
+            <li>Chicken, fish, eggs, paneer</li>
+            <li>Oats, brown rice, vegetables</li>
+            <li>Avoid sugar & fried food</li>
+          </ul>`;
+        } else {
+          exercise = `<h3>Normal Fitness Routine</h3>
+          <ul>
+            <li>Warm-up – 10 min</li>
+            <li>Dumbbell workouts</li>
+            <li>Pull-ups & push-ups</li>
+            <li>Light cardio – 15 min</li>
+          </ul>`;
+          diet = `<h3>Balanced Diet</h3>
+          <ul>
+            <li>Calories: ~2300 kcal/day</li>
+            <li>Protein: 1.2–1.5 g/kg</li>
+            <li>Rice/roti, dal, vegetables</li>
+            <li>Healthy fats – nuts, seeds</li>
+          </ul>`;
+        }
+      } else {
+        exercise = `<h3>Low Impact Exercise</h3>
+        <ul>
+          <li>Walking – 30 minutes</li>
+          <li>Light stretching & yoga</li>
+          <li>Resistance band exercise</li>
+          <li>Breathing exercises</li>
+        </ul>`;
+        diet = `<h3>Healthy Aging Diet</h3>
+        <ul>
+          <li>Calories: ~2000 kcal/day</li>
+          <li>Protein: 1 g/kg</li>
+          <li>Vegetables, fruits, soups</li>
+          <li>Low salt & low sugar</li>
+        </ul>`;
+      }
+
+      // Updated schedule to table format
+      const schedule = `<h3>Weekly & Monthly Schedule</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Frequency</th>
+            <th>Task / Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mon – Sat</strong></td>
+            <td>Follow Exercise + Diet plan strictly</td>
+          </tr>
+          <tr>
+            <td><strong>Sunday</strong></td>
+            <td>Complete rest & light walking only</td>
+          </tr>
+          <tr>
+            <td><strong>Weekly</strong></td>
+            <td>Measure weight & check body fat %</td>
+          </tr>
+          <tr>
+            <td><strong>Monthly</strong></td>
+            <td>Review progress & change routine slightly</td>
+          </tr>
+          <tr>
+            <td><strong>Yearly</strong></td>
+            <td>Full body health check-up with a doctor</td>
+          </tr>
+        </tbody>
+      </table>`;
+
+      output.innerHTML = `<h2>Your Personalized Fitness Plan</h2>${exercise}${diet}${schedule}`;
+    }
+  </script>
+</body>
+</html>
